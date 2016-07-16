@@ -3,5 +3,5 @@
 ```
 USERNAME=username
 PASSWORD=password
-ENCRYPT_KEY=randomstring
+ENCRYPT_KEY=RandomString
 ```
