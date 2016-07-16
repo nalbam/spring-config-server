@@ -1,0 +1,38 @@
+server:
+  port: 8888
+
+management:
+  context-path: /admin
+
+logging:
+  level:
+    org.springframework.cloud: debug
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/nalbam/nalbam-config-repo
+          username: ${USERNAME:username}
+          password: ${PASSWORD:password}
+          basedir: target/config
+
+#eureka:
+#  instance:
+#    leaseRenewalIntervalInSeconds: 10
+#    statusPageUrlPath: /admin/info
+#    healthCheckUrlPath: /admin/health
+
+#---
+#spring:
+#  profiles: cloud
+
+#eureka:
+#  password: ${PASSWORD:password}
+#  instance:
+#    hostname: ${vcap.application.uris[0]}
+#    nonSecurePort: 80
+#  client:
+#    serviceUrl:
+#      defaultZone: ${vcap.services.${PREFIX:}eureka.credentials.uri:http://user:${eureka.password:}@${PREFIX:}eureka.${application.domain:cfapps.io}}/eureka/
