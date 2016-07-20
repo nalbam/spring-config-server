@@ -16,7 +16,7 @@ spring:
           uri: https://github.com/nalbam/nalbam-config-repo
           username: ${USERNAME:username}
           password: ${PASSWORD:password}
-          basedir: target/config
+#          basedir: target/config
 
 #eureka:
 #  instance:
