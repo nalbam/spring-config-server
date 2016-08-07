@@ -1,10 +1,8 @@
 server:
-  port: 8888
-
-management:
-  context-path: /admin
+  port: ${PORT:8888}
 
 logging:
+  path: /data/logs
   level:
     org.springframework.cloud: debug
 
@@ -16,7 +14,9 @@ spring:
           uri: https://github.com/nalbam/nalbam-config-repo
           username: ${USERNAME:username}
           password: ${PASSWORD:password}
-#          basedir: target/config
+
+management:
+  context-path: /admin
 
 #eureka:
 #  instance:
@@ -25,8 +25,6 @@ spring:
 #    healthCheckUrlPath: /admin/health
 
 #---
-#spring:
-#  profiles: cloud
 
 #eureka:
 #  password: ${PASSWORD:password}
