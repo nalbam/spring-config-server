@@ -18,8 +18,6 @@
     <properties>
         <java.version>1.8</java.version>
 
-        <start-class>com.nalbam.config.server.ConfigServerApplication</start-class>
-
         <!-- Repository -->
         <repository-id>nalbam</repository-id>
         <repository-name>nalbam</repository-name>
@@ -61,6 +59,7 @@
         <!--<groupId>org.springframework.boot</groupId>-->
         <!--<artifactId>spring-boot-starter-security</artifactId>-->
         <!--</dependency>-->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
