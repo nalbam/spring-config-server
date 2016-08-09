@@ -1,5 +1,6 @@
 package com.nalbam.config.server;
 
+import com.nalbam.config.server.ConfigServerApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,17 +22,10 @@ import static org.junit.Assert.assertEquals;
 @SpringApplicationConfiguration(classes = ConfigServerApplication.class)
 @WebAppConfiguration
 @IntegrationTest("server.port=0")
-public class ApplicationTests {
+public class ConfigServerApplicationTests {
 
     @Value("${local.server.port}")
     private int port = 0;
-
-    @Test
-    public void configurationAvailable() {
-        @SuppressWarnings("rawtypes")
-        ResponseEntity<Map> entity = new TestRestTemplate().getForEntity("http://localhost:" + port + "/app/cloud", Map.class);
-        assertEquals(HttpStatus.OK, entity.getStatusCode());
-    }
 
     @Test
     public void envPostAvailable() {
