@@ -1,29 +1,6 @@
 server:
   port: ${PORT:8888}
 
----
-
-spring:
-  profiles: config0
-server:
-  port: 8080
-
----
-
-spring:
-  profiles: config1
-server:
-  port: 8081
-
----
-
-spring:
-  profiles: config2
-server:
-  port: 8082
-
----
-
 management:
   context-path: /admin
 
