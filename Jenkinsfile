@@ -1,19 +1,32 @@
 #!groovy
 
 node {
-   // Mark the code checkout 'stage'....
-   stage 'Checkout'
+    //echo "JOB_NAME    ${env.JOB_NAME}"
+    //echo "BRANCH_NAME ${env.BRANCH_NAME}"
 
-   // Checkout code from repository
-   checkout scm
+    // Get the maven tool.
+    // ** NOTE: This 'M3' maven tool must be configured
+    // **       in the global configuration.
+    def mvnHome = tool 'M3'
 
-   // Get the maven tool.
-   // ** NOTE: This 'M3' maven tool must be configured
-   // **       in the global configuration.
-   def mvnHome = tool 'M3'
+    stage('Checkout') {
+        checkout scm
+    }
 
-   // Mark the code build 'stage'....
-   stage 'Build'
-   // Run the maven build
-   sh "${mvnHome}/bin/mvn clean install"
+    stage('Build') {
+        if (env.BRANCH_NAME == 'master') {
+            sh '~/toaster/toast.sh v n'
+        }
+
+        sh "${mvnHome}/bin/mvn clean package"
+    }
+
+    stage('Results') {
+        junit '**/target/surefire-reports/TEST-*.xml'
+        archive 'target/*.jar'
+    }
+
+    stage('Deploy') {
+        sh '~/toaster/toast.sh v s'
+    }
 }
