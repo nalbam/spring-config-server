@@ -5,7 +5,7 @@
 
 properties([buildDiscarder(logRotator(daysToKeepStr: '60', numToKeepStr: '10')), pipelineTriggers([])])
 
-def toast = 2;
+def toast = 2
 
 node {
     stage('Checkout') {
@@ -25,6 +25,7 @@ node {
 
     stage('Code Analysis') {
         mvn 'checkstyle:checkstyle pmd:pmd pmd:cpd findbugs:findbugs -B -e'
+        step([$class: 'JUnitResultArchiver', testResults: 'target/surefire-reports/*.xml'])
         step([$class: 'CheckStylePublisher', pattern: 'target/checkstyle-result.xml'])
         step([$class: 'FindBugsPublisher', pattern: 'target/findbugsXml.xml'])
         step([$class: 'PmdPublisher', pattern: 'target/pmd.xml'])
@@ -42,7 +43,7 @@ node {
 }
 
 // Run Maven from tool "mvn"
-void mvn(def args) {
+void mvn(args) {
     // Get the maven tool.
     // ** NOTE: This 'M3' maven tool must be configured
     // **       in the global configuration.
