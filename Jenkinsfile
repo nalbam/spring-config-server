@@ -16,10 +16,15 @@ node {
         if (env.BRANCH_NAME == 'master') {
             sh '~/toaster/toast.sh version next'
         }
-        if (toast == 1) {
-            mvn 'clean deploy -B -e'
-        } else {
-            mvn 'clean package -B -e'
+        try {
+            if (toast == 1) {
+                mvn 'clean deploy -B -e'
+            } else {
+                mvn 'clean package -B -e'
+            }
+            notify('SUCCESS', 'good')
+        } catch (e) {
+            notify('FAILED', 'danger')
         }
     }
 
@@ -50,4 +55,8 @@ void mvn(args) {
     def mvnHome = tool 'M3'
 
     sh "${mvnHome}/bin/mvn ${args}"
+}
+
+def notify(status, color) {
+    slackSend(color: color, message: "${status}: '${env.JOB_NAME} [${env.BUILD_NUMBER}]'\n${env.BUILD_URL}")
 }
