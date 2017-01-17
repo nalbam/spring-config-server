@@ -25,6 +25,7 @@ node {
             notify('Build Passed', 'good')
         } catch (e) {
             notify('Build Failed', 'danger')
+            throw e
         }
     }
 
