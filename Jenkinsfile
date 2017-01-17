@@ -22,9 +22,9 @@ node {
             } else {
                 mvn 'clean package -B -e'
             }
-            notify('SUCCESS', 'good')
+            notify('Build Passed', 'good')
         } catch (e) {
-            notify('FAILED', 'danger')
+            notify('Build Failed', 'danger')
         }
     }
 
