@@ -12,3 +12,6 @@ script:
 
 after_success:
   - mvn -s settings.xml cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report
+
+notifications:
+  slack: nalbam:lZm5eyurcsoKxZgHSnNZGQYY

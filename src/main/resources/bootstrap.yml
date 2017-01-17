@@ -1,6 +1,16 @@
 spring:
   application:
     name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/nalbam/nalbam-config-repo
+          username: ${USERNAME:username}
+          password: ${PASSWORD:password}
+
+management:
+  context-path: /admin
 
 encrypt:
   key: ${ENCRYPT_KEY:RandomString}
