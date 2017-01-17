@@ -59,5 +59,5 @@ void mvn(args) {
 }
 
 def notify(status, color) {
-    slackSend(color: color, message: "${status}: '${env.JOB_NAME} [${env.BUILD_NUMBER}]'\n${env.BUILD_URL}")
+    slackSend(color: color, message: "${status}: ${env.JOB_NAME} [${env.BUILD_NUMBER}]\n${env.BUILD_URL}")
 }
