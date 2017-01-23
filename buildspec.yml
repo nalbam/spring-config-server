@@ -11,13 +11,13 @@ phases:
   pre_build:
     commands:
       - echo Build started on `date`
+      - bash toast.sh version
   build:
     commands:
-      - ./toast.sh version
       - mvn install
-      - ./toast.sh deploy
   post_build:
     commands:
+      - bash toast.sh deploy
       - echo Build completed on `date`
 artifacts:
   discard-paths: yes
