@@ -1,14 +1,9 @@
 #!/bin/bash
 
-prepare() {
-    TOKEN=""
-    ORG=""
-}
-
 branch() {
     BRANCH="`git rev-parse --abbrev-ref HEAD`"
 
-    echo "branch = ${BRANCH}"
+    echo "branch = [${BRANCH}]"
 }
 
 parse() {
@@ -90,6 +85,25 @@ deploy() {
         exit 1
     fi
 
+    dir "target"
+    dir "target/toast"
+    dir "target/toast/${ARTIFACT_ID}"
+
+    if [ ! -d target/toast/${ARTIFACT_ID} ]; then
+        echo "### toast.sh : deploy dir does not exist."
+        exit 1
+    fi
+
+    PARAM1="target/${ARTIFACT_ID}-${VERSION}.${PACKAGE}"
+    PARAM2="target/toast/${ARTIFACT_ID}/${ARTIFACT_ID}-${VERSION}.${PACKAGE}"
+
+    if [ ! -f ${PARAM1} ]; then
+        echo "### toast.sh : package does not exist. [${PARAM1}]"
+        exit 1
+    fi
+
+    cp -rf ${PARAM1} ${PARAM2}
+
     URL="${TOAST_URL}/version/build/${ARTIFACT_ID}/${VERSION}"
     RES=`curl -s --data "org=${ORG}&token=${TOKEN}" ${URL}`
     ARR=(${RES})
@@ -101,11 +115,28 @@ deploy() {
     fi
 }
 
+dir() {
+    if [ "$1" == "" ]; then
+        exit 1
+    fi
+
+    if [ ! -d $1 ] && [ ! -f $1 ]; then
+        mkdir $1
+    fi
+}
+
 ################################################################################
 
 TOAST_URL="http://toast.sh"
 
 CMD=$1
+
+if [ "$2" != "" ]; then
+    TOKEN=$2
+fi
+if [ "$3" != "" ]; then
+    ORG=$3
+fi
 
 echo "### toast.sh : ${CMD}"
 
