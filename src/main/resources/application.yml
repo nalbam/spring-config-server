@@ -4,4 +4,5 @@ server:
 logging:
   path: /data/logs
   level:
-    root: info
+    org.springframework.web: INFO
+    org.hibernate.SQL: INFO

@@ -1,33 +1,42 @@
 package com.nalbam.config.server;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.TestRestTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.Map;
-
-import static org.junit.Assert.assertEquals;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = ConfigServerApplication.class, webEnvironment = RANDOM_PORT)
 public class ConfigServerApplicationTests {
 
-    @Value("${local.server.port}")
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
+
+    @LocalServerPort
     private int port = 0;
 
     @Test
-    public void envPostAvailable() {
-        MultiValueMap<String, String> form = new LinkedMultiValueMap<>();
-        @SuppressWarnings("rawtypes")
-        ResponseEntity<Map> entity = new TestRestTemplate().postForEntity("http://localhost:" + port + "/admin/env", form, Map.class);
-        assertEquals(HttpStatus.OK, entity.getStatusCode());
+    public void health() {
+        log.info("health port : " + port);
+
+        String url = "http://localhost:" + port + "/health";
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+
+        log.info("health code : " + response.getStatusCode());
+        log.info("health body : " + response.getBody());
+
+        Assert.assertEquals(response.getStatusCode(), HttpStatus.OK);
     }
 
 }

@@ -1,11 +1,15 @@
 spring:
   application:
-    name: config-server
+    name: config
+
+---
+
+spring:
   cloud:
     config:
       server:
         git:
-          uri: https://github.com/nalbam/nalbam-config-repo
+          uri: https://github.com/yanolja/yanolja-config-repo
           username: ${USERNAME:username}
           password: ${PASSWORD:password}
 
