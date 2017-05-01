@@ -1,5 +1,5 @@
 server:
-  port: ${PORT:8888}
+  port: ${PORT:8080}
 
 logging:
   path: /data/logs
