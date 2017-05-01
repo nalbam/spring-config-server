@@ -9,7 +9,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/yanolja/yanolja-config-repo
+          uri: https://github.com/nalbam/nalbam-config-repo
           username: ${USERNAME:username}
           password: ${PASSWORD:password}
 
