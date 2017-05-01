@@ -4,4 +4,4 @@ server:
 logging:
   path: /data/logs
   level:
-    root: warn
+    root: info
