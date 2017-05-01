@@ -15,7 +15,7 @@ script:
 
 after_success:
   - mvn cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report
-  - ~/toaster/toast.sh version save none $TOAST_TOKEN nalbam
+  - ~/toaster/toast.sh version save jar $TOAST_TOKEN nalbam none
 
 deploy:
   provider: s3
