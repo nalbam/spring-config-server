@@ -8,14 +8,15 @@ install:
   - curl -s toast.sh/install | bash
 
 before_script:
-  - ~/toaster/toast.sh version next $TRAVIS_BRANCH $TOAST_TOKEN nalbam
+  - ~/toaster/toast.sh config travis local nalbam $TOAST_TOKEN
+  - ~/toaster/toast.sh version next
 
 script:
   - mvn clean package
 
 after_success:
   - mvn cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report
-  - ~/toaster/toast.sh version save jar $TOAST_TOKEN nalbam none
+  - ~/toaster/toast.sh version save jar none
 
 deploy:
   provider: s3
