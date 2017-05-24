@@ -3,9 +3,10 @@
 //echo "JOB_NAME    ${env.JOB_NAME}"
 //echo "BRANCH_NAME ${env.BRANCH_NAME}"
 
-properties([buildDiscarder(logRotator(daysToKeepStr: '60', numToKeepStr: '10')), pipelineTriggers([])])
-
-def toast = 2
+properties([
+    buildDiscarder(logRotator(daysToKeepStr: '60', numToKeepStr: '10')),
+    pipelineTriggers([[$class: "SCMTrigger", scmpoll_spec: "H/5 * * * *"]])
+])
 
 node {
     stage('Checkout') {
@@ -17,11 +18,7 @@ node {
             sh '~/toaster/toast.sh version next'
         }
         try {
-            if (toast == 1) {
-                mvn 'clean deploy -B -e'
-            } else {
-                mvn 'clean package -B -e'
-            }
+            mvn 'clean package -B -e'
             notify('Build Passed', 'good')
         } catch (e) {
             notify('Build Failed', 'danger')
@@ -41,10 +38,7 @@ node {
 
     stage('Publish') {
         archive 'target/*.jar, target/*.war'
-        sh '~/toaster/toast.sh version save'
-        if (toast == 1) {
-            sh '/data/deploy/bin/version-dev.sh'
-        }
+        sh '~/toaster/toast.sh version save jar'
     }
 }
 
@@ -59,7 +53,5 @@ void mvn(args) {
 }
 
 def notify(status, color) {
-    if (color == 'danger' || env.BRANCH_NAME == 'master') {
-        slackSend(color: color, message: "${status}: ${env.JOB_NAME} <${env.BUILD_URL}|#${env.BUILD_NUMBER}>")
-    }
+    slackSend(color: color, message: "${status}: ${env.JOB_NAME} <${env.BUILD_URL}|#${env.BUILD_NUMBER}>")
 }
