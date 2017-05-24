@@ -9,7 +9,7 @@ install:
 
 before_script:
   - ~/toaster/toast.sh config travis local nalbam $TOAST_TOKEN
-  - ~/toaster/toast.sh version next
+  - ~/toaster/toast.sh version next $TRAVIS_BRANCH
 
 script:
   - mvn clean package
