@@ -1,8 +1,14 @@
 server:
   port: ${PORT:8080}
 
-logging:
-  path: /data/logs
-  level:
-    org.springframework.web: INFO
-    org.hibernate.SQL: INFO
+spring:
+  jackson:
+    time-zone: Asia/Seoul
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+
+encrypt:
+  key: ${ENCRYPT_KEY:RandomString}
+
+management:
+  context-path: /admin
