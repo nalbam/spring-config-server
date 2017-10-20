@@ -5,18 +5,18 @@ jdk:
   - oraclejdk8
 
 install:
-  - curl -s toast.sh/install | bash
+  - curl -s toast.sh/install-v3 | bash
 
 before_script:
-  - ~/toaster/toast.sh config travis local nalbam $TOAST_TOKEN
-  - ~/toaster/toast.sh version next $TRAVIS_BRANCH
+  - ~/toaster/toast.sh c REGION ap-northeast-2
+  - ~/toaster/toast.sh c BUCKET repo.nalbam.com
 
 script:
+  - ~/toaster/toast.sh v $TRAVIS_BRANCH
   - mvn clean package
 
 after_success:
   - mvn cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report
-  - ~/toaster/toast.sh version save jar none
 
 deploy:
   provider: s3

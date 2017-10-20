@@ -21,20 +21,20 @@ public class ConfigServerApplicationTests {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @LocalServerPort
-    private int port = 0;
+    private final int port = 0;
 
     @Test
     public void health() {
-        log.info("health port : " + port);
+        this.log.info("health port : " + this.port);
 
-        String url = "http://localhost:" + port + "/health";
+        final String url = "http://localhost:" + this.port + "/health";
 
-        RestTemplate restTemplate = new RestTemplate();
+        final RestTemplate restTemplate = new RestTemplate();
 
-        ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+        final ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
 
-        log.info("health code : " + response.getStatusCode());
-        log.info("health body : " + response.getBody());
+        this.log.info("health code : " + response.getStatusCode());
+        this.log.info("health body : " + response.getBody());
 
         Assert.assertEquals(response.getStatusCode(), HttpStatus.OK);
     }
