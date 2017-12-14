@@ -1,6 +1,5 @@
 machine:
-  timezone:
-    Asia/Seoul
+  timezone: Asia/Seoul
   java:
     version: oraclejdk8
 
@@ -8,27 +7,30 @@ dependencies:
   pre:
     - curl -s toast.sh/install-v3 | bash
   post:
-    - ~/toaster/toast.sh c REGION us-east-1
-    - ~/toaster/toast.sh c BUCKET repo.me17-us.com
+    - ~/toaster/toast.sh config REGION us-east-1
+    - ~/toaster/toast.sh config BUCKET virginia.me17.com
 
 compile:
   pre:
-    - ~/toaster/toast.sh v $CIRCLE_BRANCH
+    - ~/toaster/toast.sh version $CIRCLE_BRANCH $CIRCLE_BUILD_NUM
   override:
-    - mvn clean package
+    - mvn clean package -DskipTests
+  post:
+    - ls -al target
 
 test:
-  override:
-    - ls -al target
+  post:
+    - mkdir -p $CIRCLE_TEST_REPORTS/junit/
+    - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
 
 deployment:
   development:
     branch: /^(?!master$).*$/
     commands:
-      - ~/toaster/toast.sh p eb
-      - ~/toaster/toast.sh d eb
+      - ~/toaster/toast.sh publish beanstalk
+      - ~/toaster/toast.sh deploy beanstalk config-server-dev
   production:
     branch: master
     commands:
-      - ~/toaster/toast.sh p eb
-      - ~/toaster/toast.sh d eb
+      - ~/toaster/toast.sh publish beanstalk
+      - ~/toaster/toast.sh deploy beanstalk config-server-prod

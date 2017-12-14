@@ -1,5 +1,5 @@
 server:
-  port: ${PORT:8080}
+  port: ${PORT:8888}
 
 spring:
   jackson:
@@ -11,4 +11,49 @@ encrypt:
   key: ${ENCRYPT_KEY:RandomString}
 
 management:
-  context-path: /admin
+  security:
+    enabled: false
+
+---
+
+spring:
+  profiles: default
+eureka:
+  instance:
+    hostName: localhost
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+#    enabled: false
+
+---
+
+spring:
+  profiles: dev
+eureka:
+  instance:
+    preferIpAddress: true
+    nonSecurePort: 80
+  client:
+    serviceUrl:
+      defaultZone: http://nalbam-eureka-dev.ap-northeast-2.elasticbeanstalk.com/eureka/
+
+---
+
+spring:
+  profiles: prod
+eureka:
+  instance:
+    preferIpAddress: true
+    nonSecurePort: 80
+  client:
+    serviceUrl:
+      defaultZone: http://nalbam-eureka-prod.ap-northeast-2.elasticbeanstalk.com/eureka/
+
+---
+
+spring:
+  profiles: test
+eureka:
+  client:
+    enabled: false
