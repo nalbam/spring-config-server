@@ -1,6 +1,6 @@
 # Dockerfile
 
-FROM java:8
+FROM openjdk:8-alpine
 
 MAINTAINER me@nalbam.com
 

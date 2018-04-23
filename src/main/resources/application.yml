@@ -10,20 +10,20 @@ spring:
 encrypt:
   key: ${ENCRYPT_KEY:RandomString}
 
-management:
-  security:
-    enabled: false
+#management:
+#  security:
+#    enabled: false
 
 ---
 
 spring:
   profiles: default
-eureka:
-  instance:
-    hostName: localhost
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+#eureka:
+#  instance:
+#    hostName: localhost
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka/
 #    enabled: false
 
 ---
