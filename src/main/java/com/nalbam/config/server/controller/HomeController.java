@@ -18,7 +18,7 @@ public class HomeController {
     private DiscoveryClient discoveryClient;
 
     @GetMapping("/")
-    public String health() {
+    public String home() {
         return "OK";
     }
 
