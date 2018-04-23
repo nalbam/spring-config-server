@@ -35,7 +35,7 @@
     </properties>
 
     <dependencies>
-        <!-- spring-cloud -->
+        <!-- spring-cloud-config -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-config-server</artifactId>
@@ -44,7 +44,7 @@
         <!-- spring-cloud-eureka -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <artifactId>spring-cloud-starter-eureka</artifactId>
         </dependency>
 
         <!-- jolokia -->
