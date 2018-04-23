@@ -10,9 +10,9 @@ spring:
 encrypt:
   key: ${ENCRYPT_KEY:RandomString}
 
-#management:
-#  security:
-#    enabled: false
+management:
+  security:
+    enabled: false
 
 ---
 
