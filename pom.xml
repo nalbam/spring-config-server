@@ -29,10 +29,10 @@
             <artifactId>spring-cloud-config-server</artifactId>
         </dependency>
 
-        <!-- spring-boot -->
+        <!-- spring-cloud-eureka -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
         <!-- lombok -->
