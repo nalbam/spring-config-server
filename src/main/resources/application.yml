@@ -24,7 +24,6 @@ spring:
 #  client:
 #    serviceUrl:
 #      defaultZone: http://localhost:8761/eureka/
-#    enabled: false
 
 ---
 
@@ -36,7 +35,7 @@ eureka:
     nonSecurePort: 80
   client:
     serviceUrl:
-      defaultZone: http://nalbam-eureka-dev.ap-northeast-2.elasticbeanstalk.com/eureka/
+      defaultZone: http://dev-eureka-server/eureka/
 
 ---
 
@@ -48,7 +47,7 @@ eureka:
     nonSecurePort: 80
   client:
     serviceUrl:
-      defaultZone: http://nalbam-eureka-prod.ap-northeast-2.elasticbeanstalk.com/eureka/
+      defaultZone: http://prod-eureka-server/eureka/
 
 ---
 
