@@ -2,7 +2,7 @@
 
 FROM maven:3.5-jdk-8-alpine as BUILD
 COPY . /data/src/
-RUN mvn -f /data/src/pom.xml clean package
+RUN mvn -f /data/src/pom.xml clean package -DskipTests
 
 FROM openjdk:8-jre-alpine
 ENV PORT 8888
