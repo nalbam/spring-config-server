@@ -32,10 +32,10 @@ spring:
 eureka:
   instance:
     preferIpAddress: true
-    nonSecurePort: 80
+    nonSecurePort: 8761
   client:
     serviceUrl:
-      defaultZone: http://dev-eureka-server/eureka/
+      defaultZone: http://eureka-server:8761/eureka/
 
 ---
 
@@ -44,10 +44,10 @@ spring:
 eureka:
   instance:
     preferIpAddress: true
-    nonSecurePort: 80
+    nonSecurePort: 8761
   client:
     serviceUrl:
-      defaultZone: http://prod-eureka-server/eureka/
+      defaultZone: http://eureka-server:8761/eureka/
 
 ---
 
