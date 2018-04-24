@@ -18,17 +18,17 @@ management:
 
 spring:
   profiles: default
-#eureka:
-#  instance:
-#    hostName: localhost
-#  client:
-#    serviceUrl:
-#      defaultZone: http://localhost:8761/eureka/
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
 
 ---
 
 spring:
   profiles: dev
+
 eureka:
   instance:
     preferIpAddress: true
@@ -41,6 +41,7 @@ eureka:
 
 spring:
   profiles: prod
+
 eureka:
   instance:
     preferIpAddress: true
@@ -53,6 +54,7 @@ eureka:
 
 spring:
   profiles: test
+
 eureka:
   client:
     enabled: false
