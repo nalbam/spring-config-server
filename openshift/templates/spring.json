@@ -284,12 +284,16 @@
                     "value": "${PROFILE}"
                   },
                   {
-                    "name": "CONFIG_SERVER_HOST",
-                    "value": "${CONFIG_SERVER_HOST}"
+                    "name": "USERNAME",
+                    "value": "${USERNAME}"
                   },
                   {
-                    "name": "CONFIG_SERVER_PORT",
-                    "value": "${CONFIG_SERVER_PORT}"
+                    "name": "PASSWORD",
+                    "value": "${PASSWORD}"
+                  },
+                  {
+                    "name": "ENCRYPT_KEY",
+                    "value": "${ENCRYPT_KEY}"
                   }
                 ],
                 "ports": [
