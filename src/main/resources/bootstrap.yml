@@ -7,6 +7,6 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/nalbam/spring-config-repo
+          uri: https://github.com/${USERNAME:username}/spring-config-repo
           username: ${USERNAME:username}
           password: ${PASSWORD:password}
