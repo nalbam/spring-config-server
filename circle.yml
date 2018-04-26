@@ -7,8 +7,8 @@ dependencies:
   pre:
     - curl -s toast.sh/install-v3 | bash
   post:
-    - ~/toaster/toast.sh config REGION us-east-1
-    - ~/toaster/toast.sh config BUCKET virginia.me17.com
+    - ~/toaster/toast.sh config REGION ap-northeast-2
+    - ~/toaster/toast.sh config BUCKET repo.nalbam.com
 
 compile:
   pre:
@@ -28,9 +28,9 @@ deployment:
     branch: /^(?!master$).*$/
     commands:
       - ~/toaster/toast.sh publish beanstalk
-      - ~/toaster/toast.sh deploy beanstalk config-server-dev
+      # ~/toaster/toast.sh deploy beanstalk config-server-dev
   production:
     branch: master
     commands:
       - ~/toaster/toast.sh publish beanstalk
-      - ~/toaster/toast.sh deploy beanstalk config-server-prod
+      # ~/toaster/toast.sh deploy beanstalk config-server-prod
