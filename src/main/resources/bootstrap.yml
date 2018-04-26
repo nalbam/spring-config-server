@@ -8,5 +8,5 @@ spring:
       server:
         git:
           uri: https://github.com/${USERNAME:username}/spring-config-repo
-          username: ${USERNAME:username}
-          password: ${PASSWORD:password}
+#          username: ${USERNAME:username}
+#          password: ${PASSWORD:password}
